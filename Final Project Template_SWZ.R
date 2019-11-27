@@ -8,7 +8,7 @@ anes_FTF_2016 <- read.csv("anes_FTF_2016.csv")
 
 # Start to create a simplified data frame with just the variables we'll need. (I'm doing just the DV. You'll add to this.)
 anes <- data.frame(anes_FTF_2016$V162079) # Trump thermometer
-colnames(anes)[1] <- "trump_therm" # Rename it 
+colnames(anes)[1] <- "trump_therm" # Rename it
 anes$clinton_therm <- anes_FTF_2016$V162078
 
 
@@ -22,6 +22,9 @@ anes$trump_therm[anes$trump_therm > 100] <- NA
 anes$t_minus_c <- anes$trump_therm - anes$clinton_therm
 summary(anes)
 ggplot(anes, aes(x=anes$t_minus_c)) + geom_histogram()
+
+
+# The following lines of code add our Independent Variable (Respondent's degree of Political Knowledge) to the 'anes' data frame created by Professor Ryan. This is part of our data wrangling; selecting and manipulating the data into a format that facilitates the running of the analysis we are interested in
 
 anes$party_ID <- anes_FTF_2016$V161155 #Party ID
 anes$education <- anes_FTF_2016$V161270 #High Level of Education
@@ -47,4 +50,3 @@ anes_Rep <- data.frame(subset(anes, anes$party_ID == 2))
 anes_Ind <- data.frame(subset(anes, anes$party_ID == 3))
 
 #Run Analysis
-
