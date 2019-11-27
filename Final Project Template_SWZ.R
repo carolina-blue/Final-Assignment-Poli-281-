@@ -47,14 +47,14 @@ anes$PK[anes$house_control == 2] <- anes$PK[anes$house_control == 2] + .25
 anes$PK[anes$senate_control == 2] <- anes$PK[anes$senate_control == 2] + .25
 
 # Creates subsets from 'anes' according to party identification: Republicans, Democrats and Independents. Allows for additional analysis which controls for party identification.
-anes_Dem <- data.frame(subset(anes, anes$party_ID == 1)) # Democrat identification subset
-anes_Rep <- data.frame(subset(anes, anes$party_ID == 2)) # Republican identification subset
-anes_Ind <- data.frame(subset(anes, anes$party_ID == 3)) # Independent identification subset
-
 # The party_ID column also includes 3 other values we decided not to include. Refer to discussion X for full explanation. For reference, those values are:
 # "0 = No Preference"
 # "5 = Other Party, Specify"
 # "-8 = Don't Know"
 # "- 9 = Refused" (refused to answer)
+
+anes_Dem <- data.frame(subset(anes, anes$party_ID == 1)) # Democrat identification subset
+anes_Rep <- data.frame(subset(anes, anes$party_ID == 2)) # Republican identification subset
+anes_Ind <- data.frame(subset(anes, anes$party_ID == 3)) # Independent identification subset
 
 #Run Analysis
