@@ -59,31 +59,31 @@ anes_Ind <- data.frame(subset(anes, anes$party_ID == 3)) # Independent identific
 
 #Run Analysis
 
-#Overall
+#Overall Analysis
 ovr_fit <- lm(anes$t_minus_c ~ anes$PK)
 summary(ovr_fit)
-ovr_graph <- ggplot(anes, aes(x = PK, y = t_minus_c)) + geom_point() + geom_smooth(method='lm', formula= y~x) + geom_hline(yintercept = 0) + xlab("Political Knowledge Score") + ylab("Candidate Thermometer") + ggtitle("Effect of Political Knowledge on Candidate Likeness Overall")
+ovr_graph <- ggplot(anes, aes(x = PK, y = t_minus_c)) + geom_point() + geom_smooth(method='lm', formula= y~x) + geom_hline(yintercept = 0) + xlab("Political Knowledge Score") + ylab("Candidate Thermometer") + ggtitle("Effect of Political Knowledge on Candidate Likeness \n Overall")
 ovr_graph
 
 #Democrat Analysis
 dem_fit <-lm(anes_Dem$t_minus_c ~ anes_Dem$PK) 
 summary(dem_fit)
-Dem_graph <- ggplot(anes_Dem, aes(x = PK, y = t_minus_c)) + geom_point() + geom_smooth(method='lm', formula= y~x) + geom_hline(yintercept = 0) + xlab("Political Knowledge Score") + ylab("Candidate Thermometer") + ggtitle("Effect of Political Knowledge on Candidate Likeness among Democrats")
+Dem_graph <- ggplot(anes_Dem, aes(x = PK, y = t_minus_c)) + geom_point() + geom_smooth(method='lm', formula= y~x) + geom_hline(yintercept = 0) + xlab("Political Knowledge Score") + ylab("Candidate Thermometer") + ggtitle("Effect of Political Knowledge on Candidate Likeness \n among Democrats")
 Dem_graph
 
 #Republican Analysis
 rep_fit <- lm(anes_Rep$t_minus_c ~ anes_Rep$PK) 
 summary(rep_fit)
-Rep_graph <- ggplot(anes_Rep, aes(x = PK, y = t_minus_c)) + geom_point() + geom_smooth(method='lm', formula= y~x) + geom_hline(yintercept = 0) + xlab("Political Knowledge Score") + ylab("Candidate Thermometer") + ggtitle("Effect of Political Knowledge on Candidate Likeness among Republicans")
+Rep_graph <- ggplot(anes_Rep, aes(x = PK, y = t_minus_c)) + geom_point() + geom_smooth(method='lm', formula= y~x) + geom_hline(yintercept = 0) + xlab("Political Knowledge Score") + ylab("Candidate Thermometer") + ggtitle("Effect of Political Knowledge on Candidate Likeness \n among Republicans")
 Rep_graph
 
 #Independent Analysis
 ind_fit <- lm(anes_Ind$t_minus_c ~ anes_Ind$PK) 
 summary(ind_fit)
-Ind_graph <- ggplot(anes_Ind, aes(x = PK, y = t_minus_c)) + geom_point() + geom_smooth(method='lm', formula= y~x) + geom_hline(yintercept = 0) + xlab("Political Knowledge Score") + ylab("Candidate Thermometer") + ggtitle("Effect of Political Knowledge on Candidate Likeness among Independents")
+Ind_graph <- ggplot(anes_Ind, aes(x = PK, y = t_minus_c)) + geom_point() + geom_smooth(method='lm', formula= y~x) + geom_hline(yintercept = 0) + xlab("Political Knowledge Score") + ylab("Candidate Thermometer") + ggtitle("Effect of Political Knowledge on Candidate Likeness \n among Independents")
 Ind_graph
 
 #Combined Graph
 comb_graph <- ggplot(anes, aes(x = PK, y = t_minus_c)) + geom_smooth(method='lm', formula= y~x, color = "purple") + geom_smooth(data = anes_Dem, method = 'lm', formula= y~x, color = "blue") + geom_smooth(data = anes_Rep, method = 'lm', formula = y~x, color = "red") + geom_smooth(data = anes_Ind, method = 'lm', formula= y~x, color = "green") + geom_hline(yintercept = 0) + xlab("Political Knowledge") + ylab("Candidate Thermometer") + ggtitle("Effect of Political Knowledge on Candidate Likeness") 
 comb_graph
-       
+  
