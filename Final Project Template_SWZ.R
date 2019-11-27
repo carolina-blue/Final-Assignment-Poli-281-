@@ -1,7 +1,8 @@
 rm(list=ls())
+
 library(ggplot2)
 
-setwd("~/OneDrive - University of North Carolina at Chapel Hill/Senior Year/Fall 2019/POLI 281/Assignments/Final Project")
+setwd()
 
 # Load data
 anes_FTF_2016 <- read.csv("anes_FTF_2016.csv")
@@ -26,27 +27,34 @@ ggplot(anes, aes(x=anes$t_minus_c)) + geom_histogram()
 
 # The following lines of code add our Independent Variable (Respondent's degree of Political Knowledge) to the 'anes' data frame created by Professor Ryan. This is part of our data wrangling; selecting and manipulating the data into a format that facilitates the running of the analysis we are interested in
 
-anes$party_ID <- anes_FTF_2016$V161155 #Party ID
-anes$education <- anes_FTF_2016$V161270 #High Level of Education
-anes$years_Senators <- anes_FTF_2016$V161513 # How many years Senators are elected for?
-anes$spend_least <- anes_FTF_2016$V161514 # What do we spend the least on?
-anes$house_control <- anes_FTF_2016$V161515  # Which party had control in House?
-anes$senate_control <- anes_FTF_2016$V161516 # Which party had control in Senate?
-anes$PK <- 0
+# PK questions between quotations are shortened and not exact copies. For exact question, refer to our appendix or look up variable in variable list
+anes$party_ID <- anes_FTF_2016$V161155 # Respondent's Party ID
+anes$education <- anes_FTF_2016$V161270 # Respondent's Highest Level of Education, a possible confounder to investigate later
+anes$years_Senators <- anes_FTF_2016$V161513 # PK question: "How many years Senators are elected for?"
+anes$spend_least <- anes_FTF_2016$V161514 # PK question: "What does Federal Gov. currently spend the least on?"
+anes$house_control <- anes_FTF_2016$V161515  # PK question: "Which party had control in House?"
+anes$senate_control <- anes_FTF_2016$V161516 # PK question: "Which party had control in Senate?"
+anes$PK <- 0 # Creates column filled (temporarily) with 0's. This column will become each respondent's Political Knowledge score based on the above PK questions. I.e. it will become our IV
 
 
 # Code to drop incomplete cases--might come in handy.
 anes <- anes[complete.cases(anes),]
 
-#Calculate PK Scores
+# Calculates PK Scores. The number after the '==' indicates the factually correct answer to the PK question. If respondents answered correctly. They receive + 0.25. For why our group chose + 0.25 as the number, please refer to our discussion section on P X (FILL THIS IN)
 anes$PK[anes$years_Senators == 6] <- anes$PK[anes$years_Senators == 6] + .25
 anes$PK[anes$spend_least == 1] <- anes$PK[anes$spend_least == 1] + .25
 anes$PK[anes$house_control == 2] <- anes$PK[anes$house_control == 2] + .25
 anes$PK[anes$senate_control == 2] <- anes$PK[anes$senate_control == 2] + .25
 
-#Then Subset ANES to Rep, Dem and Ind.
-anes_Dem <- data.frame(subset(anes, anes$party_ID == 1))
-anes_Rep <- data.frame(subset(anes, anes$party_ID == 2))
-anes_Ind <- data.frame(subset(anes, anes$party_ID == 3))
+# Creates subsets from 'anes' according to party identification: Republicans, Democrats and Independents. Allows for additional analysis which controls for party identification.
+anes_Dem <- data.frame(subset(anes, anes$party_ID == 1)) # Democrat identification subset
+anes_Rep <- data.frame(subset(anes, anes$party_ID == 2)) # Republican identification subset
+anes_Ind <- data.frame(subset(anes, anes$party_ID == 3)) # Independent identification subset
+
+# The party_ID column also includes 3 other values we decided not to include. Refer to discussion X for full explanation. For reference, those values are:
+# "0 = No Preference"
+# "5 = Other Party, Specify"
+# "-8 = Don't Know"
+# "- 9 = Refused" (refused to answer)
 
 #Run Analysis
