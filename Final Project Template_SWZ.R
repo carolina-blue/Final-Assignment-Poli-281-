@@ -46,6 +46,17 @@ anes$PK[anes$spend_least == 1] <- anes$PK[anes$spend_least == 1] + .25
 anes$PK[anes$house_control == 2] <- anes$PK[anes$house_control == 2] + .25
 anes$PK[anes$senate_control == 2] <- anes$PK[anes$senate_control == 2] + .25
 
+#Cleans up and ranks the education variable given from the ANES survey.
+anes$edu_ranked <- NA
+anes$edu_ranked[anes$education == 1 | anes$education == 2 |anes$education == 3 | anes$education == 4] <- 1 # Below High School
+anes$edu_ranked[anes$education == 5 | anes$education == 6 | anes$education == 7 | anes$education == 8] <- 2 # Some High School, No Diploma
+anes$edu_ranked[anes$education == 9] <- 3 # High School Diploma or Equivalent
+anes$edu_ranked[anes$education == 10] <- 4 # Some College, No Degree
+anes$edu_ranked[anes$education == 11 | anes$education == 12] <- 5 # Associates Degree
+anes$edu_ranked[anes$education == 13] <- 6 # Bachelors Degree
+anes$edu_ranked[anes$education == 14] <- 7 # Masters Degree
+anes$edu_ranked[anes$education == 15 | anes$education == 16] <- 8 # Doctorate Degree & Professional School
+
 # Creates subsets from 'anes' according to party identification: Republicans, Democrats and Independents. Allows for additional analysis which controls for party identification.
 # The party_ID column also includes 3 other values we decided not to include. Refer to discussion X for full explanation. For reference, those values are:
 # "0 = No Preference"
