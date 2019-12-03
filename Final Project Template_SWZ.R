@@ -111,7 +111,7 @@ Ind_graph <- ggplot(anes_Ind, aes(x = PK, y = t_minus_c)) + geom_point() + geom_
 Ind_graph
 
 #Combined Graph
-comb_graph <- ggplot(anes, aes(x = PK, y = t_minus_c)) + geom_point() +geom_smooth(method='lm', formula= y~x, color = "purple") + geom_smooth(data = anes_Dem, method = 'lm', formula= y~x, color = "blue") + geom_smooth(data = anes_Rep, method = 'lm', formula = y~x, color = "red") + geom_smooth(data = anes_Ind, method = 'lm', formula= y~x, color = "green") + geom_hline(yintercept = 0) + xlab("Political Knowledge Score") + ylab("Candidate Thermometer") + ggtitle("Effect of Political Knowledge on Candidate Likeness") 
+comb_graph <- ggplot(anes, aes(x = PK, y = t_minus_c)) + geom_point() +geom_smooth(method='lm', formula= y~x, color = "purple") + geom_smooth(data = anes_Dem, method = 'lm', formula= y~x, color = "blue") + geom_smooth(data = anes_Rep, method = 'lm', formula = y~x, color = "red") + geom_smooth(data = anes_Ind, method = 'lm', formula= y~x, color = "green") + geom_hline(yintercept = 0) + xlab("Political Knowledge Score") + ylab("Candidate Thermometer") + ggtitle("Effect of Political Knowledge on Candidate Likeness") + theme(legend.position = "right") 
 comb_graph
        
   
